@@ -6,16 +6,14 @@
 int main(int argc, char *argv[])
 {
     // Ensure proper usage
-    if (argc != 2)
-    {
+    if (argc != 2) {
         printf("Usage: ./recover image\n");
         return 1;
     }
  
     // Open input file
     FILE *inptr = fopen(argv[1], "r");
-    if (inptr == NULL)
-    {
+    if (inptr == NULL) {
         printf("Could not open %s.\n", argv[1]);
         return 2;
     }
@@ -27,14 +25,12 @@ int main(int argc, char *argv[])
     int counter = 0;
  
     // Read input file
-    while (fread(buffer, BUFFER_SIZE, 1, inptr) == 1)
-    {
+    while (fread(buffer, BUFFER_SIZE, 1, inptr) == 1) {
         // Check if start of new JPEG
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
             // Close previous file
-            if (counter > 0)
-            {
+            if (counter > 0) {
                 fclose(outptr);
             }
  
@@ -45,8 +41,7 @@ int main(int argc, char *argv[])
         }
  
         // Write to file
-        if (counter > 0)
-        {
+        if (counter > 0) {
             fwrite(buffer, BUFFER_SIZE, 1, outptr);
         }
     }
