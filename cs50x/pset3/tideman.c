@@ -157,7 +157,6 @@ void merge(int array[], int start, int middle, int end) {
     } pair_temp;
 
     pair_temp pairs_temp[pair_count];
-
     while (i <= middle && j <= end) {
         if (array[i] >= array[j]) {
             pairs_temp[k].winner = pairs[i].winner;
