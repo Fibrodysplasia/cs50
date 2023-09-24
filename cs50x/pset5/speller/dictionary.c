@@ -18,7 +18,9 @@ typedef struct node {
 }
 node;
 
-const unsigned int N = 10000;
+// TODO:
+// This should be dynamically sized
+const unsigned int N = 26;
 node *table[N];
 
 // Load dictionary into memory
@@ -71,14 +73,17 @@ bool unload(void) {
             free(temp);
         }
     }
+    dictionary_loaded = false; 
     return true;
 }
 
 // Returns true if word is in dictionary, else false
 
-// TODO:
-// Staff solution spends 0 time in check somehow, figure it out
 bool check(const char *word) {
+
+    // TODO:
+    // Staff solution spends 0.01 time in check somehow, figure it out
+
     int index = hash(word);
     node *cursor = table[index];
 
@@ -96,6 +101,7 @@ unsigned int hash(const char *word) {
     // TODO: Improve this hash function, it's garbage
     return toupper(word[0]) - 'A';
 }
+
 
 
 
